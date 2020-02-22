@@ -6,7 +6,8 @@
     <input
       type="text"
       class="form-control"
-      aria-label="Amount (to the nearest dollar)"
+      :value="amount"
+      @input="e => update_amount(e)"
     />
     <div class="input-group-append">
       <button
@@ -44,10 +45,10 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   name: "money",
   computed: {
-    ...mapGetters(["currency_code", "show_menu"])
+    ...mapGetters(["currency_code", "show_menu", "amount"])
   },
   methods: {
-    ...mapActions(["update_currency_code", "toggle_menu"])
+    ...mapActions(["update_currency_code", "toggle_menu", "update_amount"])
   }
 };
 </script>

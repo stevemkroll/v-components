@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    amount: "0",
     currency_code: "USD",
     show_menu: false
   },
@@ -14,6 +15,9 @@ export default new Vuex.Store({
     },
     show_menu: state => {
       return state.show_menu;
+    },
+    amount: state => {
+      return state.amount;
     }
   },
   mutations: {
@@ -22,6 +26,22 @@ export default new Vuex.Store({
     },
     toggle_menu: (state, payload) => {
       state.show_menu = payload;
+    },
+    amount_add_digit: (state, payload) => {
+      if (state.amount != "0") {
+        state.amount = state.amount + payload;
+      } else {
+        state.amount = payload;
+      }
+    },
+    amount_remove_digit: state => {
+      let len = state.amount.length;
+      console.log(len);
+      if (len > 1) {
+        state.amount = state.amount.slice(0, len - 1);
+      } else {
+        state.amount = "0";
+      }
     }
   },
   actions: {
@@ -31,6 +51,58 @@ export default new Vuex.Store({
     },
     toggle_menu: store => {
       store.commit("toggle_menu", !store.state.show_menu);
+    },
+    validate_character: (_, char) => {
+      return new Promise((resolve, reject) => {
+        let exp = /^[0-9]|\b(null)\b$/;
+        let valid = new RegExp(exp).test(char);
+        if (valid === true) {
+          resolve();
+        } else {
+          reject();
+        }
+      });
+    },
+    prevent_null: store => {
+      return new Promise((resolve, reject) => {
+        if (store.state.amount.length > 0 && store.state.amount != "0") {
+          resolve();
+        } else {
+          reject();
+        }
+      });
+    },
+    prevent_leading_zero: (store, character) => {
+      return new Promise((resolve, reject) => {
+        let len = store.state.amount.length;
+        if (len === 1 && character === "0") {
+          reject();
+        } else {
+          resolve();
+        }
+      });
+    },
+    update_amount: async (store, event) => {
+      try {
+        console.log(event.inputType);
+        await store.dispatch("validate_character", event.data);
+        switch (event.inputType) {
+          case "insertText":
+            await store.dispatch("prevent_leading_zero", event.data);
+            store.commit("amount_add_digit", event.data);
+            break;
+          case "deleteContentBackward":
+          case "deleteSoftLineBackward":
+          case "deleteWordBackward":
+            await store.dispatch("prevent_null");
+            store.commit("amount_remove_digit");
+            break;
+          default:
+            event.target.value = store.state.amount;
+        }
+      } catch {
+        event.target.value = store.state.amount;
+      }
     }
   }
 });
