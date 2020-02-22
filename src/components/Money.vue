@@ -12,7 +12,7 @@
       <button
         class="btn input-group-text rounded-right dropdown-toggle"
         type="button"
-        @click="toggle_menu()"
+        @click="e => toggle_menu(e)"
       >
         {{ currency_code }}
       </button>
@@ -23,31 +23,31 @@
         <a
           class="dropdown-item"
           href="javascript:void(0)"
-          :class="{ active: true }"
+          :class="{ active: currency_code === 'USD' ? true : false }"
+          @click="e => update_currency_code(e)"
           >USD</a
         >
-        <a class="dropdown-item" href="javascript:void(0)">CAD</a>
+        <a
+          class="dropdown-item"
+          href="javascript:void(0)"
+          :class="{ active: currency_code === 'CAD' ? true : false }"
+          @click="e => update_currency_code(e)"
+          >CAD</a
+        >
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "money",
-  data() {
-    return {
-      show_menu: false
-    };
-  },
   computed: {
-    ...mapGetters(["currency_code"])
+    ...mapGetters(["currency_code", "show_menu"])
   },
   methods: {
-    toggle_menu() {
-      this.show_menu = !this.show_menu;
-    }
+    ...mapActions(["update_currency_code", "toggle_menu"])
   }
 };
 </script>
