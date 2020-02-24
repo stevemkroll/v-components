@@ -36,7 +36,6 @@ export default new Vuex.Store({
     },
     amount_remove_digit: state => {
       let len = state.amount.length;
-      console.log(len);
       if (len > 1) {
         state.amount = state.amount.slice(0, len - 1);
       } else {
@@ -74,8 +73,9 @@ export default new Vuex.Store({
     },
     prevent_leading_zero: (store, character) => {
       return new Promise((resolve, reject) => {
-        let len = store.state.amount.length;
-        if (len === 1 && character === "0") {
+        let amt = store.state.amount;
+        let len = amt.length;
+        if (len === 1 && amt === "0" && character === "0") {
           reject();
         } else {
           resolve();
@@ -84,7 +84,7 @@ export default new Vuex.Store({
     },
     update_amount: async (store, event) => {
       try {
-        console.log(event.inputType);
+        // console.log(event.inputType);
         await store.dispatch("validate_character", event.data);
         switch (event.inputType) {
           case "insertText":

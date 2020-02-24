@@ -6,7 +6,7 @@
     <input
       type="text"
       class="form-control"
-      :value="amount | money"
+      :value="amount"
       @input="e => update_amount(e)"
     />
     <div class="input-group-append">
@@ -60,7 +60,6 @@ export default {
           } else {
             return "0.0" + amount;
           }
-
         case 2:
           return "0." + amount;
         default:
