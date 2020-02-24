@@ -84,7 +84,6 @@ export default new Vuex.Store({
     },
     update_amount: async (store, event) => {
       try {
-        // console.log(event.inputType);
         await store.dispatch("validate_character", event.data);
         switch (event.inputType) {
           case "insertText":

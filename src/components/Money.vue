@@ -6,7 +6,8 @@
     <input
       type="text"
       class="form-control"
-      :value="amount"
+      :value="amount | money"
+      @keydown="e => keepFormat(e, amount)"
       @input="e => update_amount(e)"
     />
     <div class="input-group-append">
@@ -48,7 +49,18 @@ export default {
     ...mapGetters(["currency_code", "show_menu", "amount"])
   },
   methods: {
-    ...mapActions(["update_currency_code", "toggle_menu", "update_amount"])
+    ...mapActions(["update_currency_code", "toggle_menu", "update_amount"]),
+    keepFormat(event, amount) {
+      let exp = /^[0-9]/;
+      console.log(event);
+      let valid = new RegExp(exp).test(event.key);
+      if (
+        (amount === "0" && amount.length === 1 && !valid) ||
+        (amount === "0" && amount.length === 1 && event.key === "0")
+      ) {
+        event.preventDefault();
+      }
+    }
   },
   filters: {
     money(amount) {
