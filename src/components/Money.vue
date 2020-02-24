@@ -52,7 +52,6 @@ export default {
     ...mapActions(["update_currency_code", "toggle_menu", "update_amount"]),
     keepFormat(event, amount) {
       let exp = /^[0-9]/;
-      console.log(event);
       let valid = new RegExp(exp).test(event.key);
       if (
         (amount === "0" && amount.length === 1 && !valid) ||
