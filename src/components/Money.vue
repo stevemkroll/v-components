@@ -51,11 +51,14 @@ export default {
   methods: {
     ...mapActions(["update_currency_code", "toggle_menu", "update_amount"]),
     keepFormat(event, amount) {
-      let exp = /^[0-9]/;
-      let valid = new RegExp(exp).test(event.key);
+      let numExp = /^[0-9]/;
+      let validExp = /^[0-9]|\bbackspace\b/;
+      let numKey = new RegExp(numExp).test(event.key);
+      let validKey = new RegExp(validExp).test(event.key.toLowerCase());
       if (
-        (amount === "0" && amount.length === 1 && !valid) ||
-        (amount === "0" && amount.length === 1 && event.key === "0")
+        (amount === "0" && !numKey) ||
+        (amount === "0" && numKey && event.key === "0") ||
+        (amount !== "0" && !validKey)
       ) {
         event.preventDefault();
       }

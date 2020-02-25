@@ -2,7 +2,7 @@
   <div id="app">
     <div class="vh-100 bg-light overflow-hidden">
       <div class="row h-100">
-        <div class="col-4 mx-auto my-auto">
+        <div class="col-6 mx-auto my-auto">
           <money />
         </div>
       </div>
