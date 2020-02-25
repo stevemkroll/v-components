@@ -63,23 +63,6 @@ export default {
         event.preventDefault();
       }
     }
-  },
-  filters: {
-    money(amount) {
-      let len = amount.length;
-      switch (len) {
-        case 1:
-          if (amount === "0") {
-            return "0.00";
-          } else {
-            return "0.0" + amount;
-          }
-        case 2:
-          return "0." + amount;
-        default:
-          return amount.slice(0, len - 2) + "." + amount.slice(len - 2, len);
-      }
-    }
   }
 };
 </script>

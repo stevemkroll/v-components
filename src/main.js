@@ -5,7 +5,9 @@ import store from "./store";
 import "@/assets/main.scss";
 
 Vue.config.productionTip = false;
+import { money } from "./filters/money";
 
+Vue.use(money);
 new Vue({
   store,
   render: h => h(App)
