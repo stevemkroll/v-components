@@ -6,10 +6,6 @@
           <small><strong class="text-muted">Cheddar</strong></small>
           <money />
           {{ amount | money }}
-          <!-- <br /> -->
-          <!-- <small><strong class="text-muted">FP-Money</strong></small> -->
-          <!-- <fpmoney v-model="value" :currency.sync="currency" /> -->
-          <!-- {{ value }} -->
         </div>
       </div>
     </div>
@@ -20,22 +16,13 @@
 import money from "@/components/Money.vue";
 import { mapGetters } from "vuex";
 
-// import fpmoney from "fp-money/dist/fp-money-vue.js";
-// import "fp-money/dist/fp-money.css";
 export default {
   name: "app",
   components: {
     money
-    // fpmoney
   },
   computed: {
     ...mapGetters(["amount"])
   }
-  // data() {
-  //   return {
-  //     value: 0,
-  //     currency: "USD"
-  //   };
-  // }
 };
 </script>
