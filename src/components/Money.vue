@@ -5,8 +5,9 @@
     </div>
     <input
       type="text"
-      class="form-control"
+      class="form-control text-right"
       :value="amount | money"
+      @click="e => setCursor(e)"
       @keydown="e => keepFormat(e, amount)"
       @input="e => update_amount(e)"
     />
@@ -62,6 +63,9 @@ export default {
       ) {
         event.preventDefault();
       }
+    },
+    setCursor(event) {
+      event.target.selectionStart = event.target.value.length;
     }
   }
 };
