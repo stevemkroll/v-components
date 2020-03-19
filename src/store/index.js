@@ -9,7 +9,7 @@ import { phone_state } from "./modules/phone.js";
 export default new Vuex.Store({
   strict: true,
   modules: {
-    money_state,
-    phone_state
+    money: money_state,
+    phone: phone_state
   }
 });
