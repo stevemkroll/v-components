@@ -18,7 +18,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 export default {
-  name: "money",
+  name: "phone",
   computed: {
     ...mapGetters(["phone"])
   },
