@@ -3,6 +3,9 @@
     <div class="vh-100 bg-light overflow-hidden">
       <div class="row h-100">
         <div class="col-10 col-md-6 col-lg-4 mx-auto my-auto">
+          <small><strong class="text-muted">Money</strong></small>
+          <money />
+          <br />
           <small><strong class="text-muted">Phone #</strong></small>
           <phone />
         </div>
