@@ -15,16 +15,14 @@
 </template>
 
 <script>
+import money from "@/components/Money.vue";
 import phone from "@/components/Phone.vue";
-import { mapGetters } from "vuex";
 
 export default {
   name: "app",
   components: {
+    money,
     phone
-  },
-  computed: {
-    ...mapGetters(["phone"])
   }
 };
 </script>
