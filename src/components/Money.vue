@@ -5,8 +5,9 @@
     </div>
     <input
       type="text"
-      class="form-control"
+      class="form-control text-right"
       :value="amount | money"
+      @click="e => setCursor(e)"
       @keydown="e => keepFormat(e, amount)"
       @input="e => update_amount(e)"
     />
@@ -62,23 +63,9 @@ export default {
       ) {
         event.preventDefault();
       }
-    }
-  },
-  filters: {
-    money(amount) {
-      let len = amount.length;
-      switch (len) {
-        case 1:
-          if (amount === "0") {
-            return "0.00";
-          } else {
-            return "0.0" + amount;
-          }
-        case 2:
-          return "0." + amount;
-        default:
-          return amount.slice(0, len - 2) + "." + amount.slice(len - 2, len);
-      }
+    },
+    setCursor(event) {
+      event.target.selectionStart = event.target.value.length;
     }
   }
 };
