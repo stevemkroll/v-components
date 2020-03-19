@@ -1,23 +1,23 @@
 export const phone_state = {
   state: {
-    phone: ""
+    value: ""
   },
   getters: {
     phone: state => {
-      return state.phone;
+      return state.value;
     }
   },
   mutations: {
     phone_add_digit: (state, payload) => {
-      if (state.phone != "0") {
-        state.phone = state.phone + payload;
+      if (state.value != "0") {
+        state.value = state.value + payload;
       } else {
-        state.phone = payload;
+        state.value = payload;
       }
     },
     phone_remove_digit: state => {
-      let len = state.phone.length;
-      state.phone = state.phone.slice(0, len - 1);
+      let len = state.value.length;
+      state.value = state.value.slice(0, len - 1);
     }
   },
   actions: {
@@ -45,10 +45,10 @@ export const phone_state = {
             store.commit("phone_remove_digit");
             break;
           default:
-            event.target.value = store.state.phone;
+            event.target.value = store.state.value;
         }
       } catch {
-        event.target.value = store.state.phone;
+        event.target.value = store.state.value;
       }
     }
   }

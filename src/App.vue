@@ -6,7 +6,7 @@
           <small><strong class="text-muted">Money</strong></small>
           <money />
           <br />
-          <small><strong class="text-muted">Phone #</strong></small>
+          <small><strong class="text-muted">Phone / Fax</strong></small>
           <phone />
         </div>
       </div>
